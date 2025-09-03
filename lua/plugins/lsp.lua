@@ -3,15 +3,7 @@ return {
 	dependencies = {
 		-- Automatically install LSPs and related tools to stdpath for Neovim
 		{ "mason-org/mason.nvim", config = true }, -- NOTE: Must be loaded before dependants
-		-- mason-lspconfig:
-		-- - Bridges the gap between LSP config names (e.g. "lua_ls") and actual Mason package names (e.g. "lua-language-server").
-		-- - Used here only to allow specifying language servers by their LSP name (like "lua_ls") in `ensure_installed`.
-		-- - It does not auto-configure servers — we use vim.lsp.config() + vim.lsp.enable() explicitly for full control.
 		"mason-org/mason-lspconfig.nvim",
-		-- mason-tool-installer:
-		-- - Installs LSPs, linters, formatters, etc. by their Mason package name.
-		-- - We use it to ensure all desired tools are present.
-		-- - The `ensure_installed` list works with mason-lspconfig to resolve LSP names like "lua_ls".
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 
 		-- Useful status updates for LSP.
@@ -79,7 +71,6 @@ return {
 
 				-- The following two autocommands are used to highlight references of the
 				-- word under your cursor when your cursor rests there for a little while.
-				--    See `:help CursorHold` for information about when this is executed
 				-- When you move your cursor, the highlights will be cleared (the second autocommand).
 				local client = vim.lsp.get_client_by_id(event.data.client_id)
 				if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
@@ -123,12 +114,6 @@ return {
 		capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
 		-- Enable the following language servers
-		--
-		-- Add any additional override configuration in the following tables. Available keys are:
-		-- - cmd (table): Override the default command used to start the server
-		-- - filetypes (table): Override the default list of associated filetypes for the server
-		-- - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
-		-- - settings (table): Override the default settings passed when initializing the server.
 		local servers = {
 			cmake = {},
 			clangd = {},
