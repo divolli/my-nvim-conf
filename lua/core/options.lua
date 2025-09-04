@@ -1,4 +1,8 @@
 vim.wo.number = true -- Make line numbers default (default: false)
+vim.o.inccommand = "split" -- Live preview of :s commands
+vim.o.virtualedit = "block" -- Allow cursor past end of line in visual block mode
+vim.o.laststatus = 3 -- Global statusline
+vim.o.confirm = true -- Confirm before closing unsaved files
 vim.o.relativenumber = true -- Set relative numbered lines (default: false)
 vim.o.clipboard = "unnamedplus" -- Sync clipboard between OS and Neovim. (default: '')
 vim.o.wrap = false -- Display lines as one long line (default: true)
@@ -37,11 +41,22 @@ vim.o.backup = false -- Creates a backup file (default: false)
 vim.o.writebackup = false -- If a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited (default: true)
 vim.o.undofile = true -- Save undo history (default: false)
 vim.o.completeopt = "menuone,noselect" -- Set completeopt to have a better completion experience (default: 'menu,preview')
+
 -- Folding
 vim.o.foldmethod = "expr"
-vim.o.foldexpr = "nvim_treesitter#foldexpr()"
-vim.o.foldlevel = 99 -- open all folds by default
-vim.o.foldenable = true -- enable folding
+vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.o.foldlevel = 99
+vim.o.foldenable = true
+vim.o.foldlevelstart = 99 -- Start with all folds open
+
+-- Ensure folding works after file load
+vim.api.nvim_create_autocmd({ "BufReadPost" }, {
+	callback = function()
+		vim.defer_fn(function()
+			vim.cmd("normal! zx")
+		end, 100) -- Small delay to ensure Treesitter is ready
+	end,
+})
 
 vim.opt.shortmess:append("c") -- Don't give |ins-completion-menu| messages (default: does not include 'c')
 vim.opt.iskeyword:append("-") -- Hyphenated words recognized by searches (default: does not include '-')

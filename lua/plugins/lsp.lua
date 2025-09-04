@@ -69,6 +69,11 @@ return {
 				--  For example, in C this would take you to the header.
 				map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
+				-- Format current buffer (very useful for C/C++)
+				map("<leader>f", function()
+					vim.lsp.buf.format({ async = true })
+				end, "[F]ormat Buffer")
+
 				-- The following two autocommands are used to highlight references of the
 				-- word under your cursor when your cursor rests there for a little while.
 				-- When you move your cursor, the highlights will be cleared (the second autocommand).
@@ -106,6 +111,14 @@ return {
 			end,
 		})
 
+		-- Auto-format on save for specific filetypes
+		vim.api.nvim_create_autocmd("BufWritePre", {
+			pattern = { "*.c", "*.cpp", "*.cc", "*.cxx", "*.h", "*.hpp" },
+			callback = function()
+				vim.lsp.buf.format({ async = false })
+			end,
+		})
+
 		-- LSP servers and clients are able to communicate to each other what features they support.
 		-- By default, Neovim doesn't support everything that is in the LSP specification.
 		-- When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
@@ -116,7 +129,33 @@ return {
 		-- Enable the following language servers
 		local servers = {
 			cmake = {},
-			clangd = {},
+			clangd = {
+				cmd = {
+					"clangd",
+					"--background-index",
+					"--clang-tidy",
+					"--header-insertion=iwyu",
+					"--completion-style=detailed",
+					"--function-arg-placeholders",
+					"--fallback-style=llvm",
+				},
+				init_options = {
+					usePlaceholders = true,
+					completeUnimported = true,
+					clangdFileStatus = true,
+				},
+				settings = {
+					clangd = {
+						InlayHints = {
+							Designators = true,
+							Enabled = true,
+							ParameterNames = true,
+							DeducedTypes = true,
+						},
+						fallbackFlags = { "-std=c++17" }, -- Can change version
+					},
+				},
+			},
 			ts_ls = {},
 			ruff = {},
 			pylsp = {
@@ -180,6 +219,8 @@ return {
 			"stylua", -- Used to format Lua code
 			"clangd", -- for C/C++
 			"cmake-language-server", -- CMake
+			"clang-format", -- C/C++ formatter
+			"cpplint", -- C++ linter
 		})
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
