@@ -42,7 +42,7 @@ return {
 				theme = "gruvbox", -- Set theme based on environment variable
 				section_separators = { left = "", right = "" },
 				component_separators = { left = "|", right = "|" },
-				disabled_filetypes = { "alpha", "neo-tree" },
+				disabled_filetypes = { "alpha" },
 				always_divide_middle = true,
 				always_show_tabline = true,
 				refresh = {
@@ -88,7 +88,7 @@ return {
 			winbar = {},
 			inactive_winbar = {},
 			tabline = {},
-			extensions = { "fugitive" },
+			extensions = { "fugitive", "neo-tree" },
 		})
 	end,
 }

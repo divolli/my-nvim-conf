@@ -38,7 +38,7 @@ vim.o.mouse = "a" -- Enable mouse mode (default: '')
 -- UI and Status
 vim.o.showmode = false -- We don't need to see things like -- INSERT -- anymore (default: true)
 vim.o.showtabline = 2 -- Always show tabs (default: 1)
-vim.o.laststatus = 3 -- Global statusline
+vim.o.laststatus = 2 -- Global statusline
 vim.o.cmdheight = 0 -- More space in the Neovim command line for displaying messages (default: 1)
 vim.o.pumheight = 10 -- Pop up menu height (default: 0)
 
