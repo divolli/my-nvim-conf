@@ -1,7 +1,7 @@
 -- Line Numbers and Display
 vim.wo.number = true -- Make line numbers default (default: false)
 vim.o.relativenumber = true -- Set relative numbered lines (default: false)
-vim.o.numberwidth = 4 -- Set number column width to 2 {default 4} (default: 4)
+vim.o.numberwidth = 2 -- Set number column width to 2 {default 4}
 vim.o.cursorline = false -- Highlight the current line (default: false)
 vim.wo.signcolumn = "yes" -- Keep signcolumn on by default (default: 'auto')
 vim.opt.termguicolors = true -- Set termguicolors to enable highlight groups (default: false)
@@ -37,7 +37,7 @@ vim.o.mouse = "a" -- Enable mouse mode (default: '')
 
 -- UI and Status
 vim.o.showmode = false -- We don't need to see things like -- INSERT -- anymore (default: true)
-vim.o.showtabline = 2 -- Always show tabs (default: 1)
+vim.o.showtabline = 0 -- Always show tabs (default: 1)
 vim.o.laststatus = 2 -- Global statusline
 vim.o.cmdheight = 0 -- More space in the Neovim command line for displaying messages (default: 1)
 vim.o.pumheight = 10 -- Pop up menu height (default: 0)

@@ -14,6 +14,35 @@ return {
 			path = 1, -- 0 = just filename, 1 = relative path, 2 = absolute path
 		}
 
+		-- Shows buffers amount and current buffer
+		local buffers_progress = function()
+			local buffers = vim.fn.getbufinfo({ buflisted = 1 })
+			local total = #buffers
+			if total > 1 then
+				local current = vim.fn.bufnr("%")
+				-- Find index of current buffer in list
+				local index = 0
+				for i, buf in ipairs(buffers) do
+					if buf.bufnr == current then
+						index = i
+						break
+					end
+				end
+				return " " .. index .. "/" .. total
+			end
+			return ""
+		end
+
+		-- Same for tabs
+		local tabs_progress = function()
+			local total = vim.fn.tabpagenr("$")
+			if total > 1 then
+				local current = vim.fn.tabpagenr()
+				return " " .. current .. "/" .. total
+			end
+			return ""
+		end
+
 		local hide_in_width = function()
 			return vim.fn.winwidth(0) > 100
 		end
@@ -67,7 +96,7 @@ return {
 			sections = {
 				lualine_a = { mode },
 				lualine_b = { "branch", diff, diagnostics },
-				lualine_c = { filename },
+				lualine_c = { tabs_progress, buffers_progress, filename },
 				lualine_x = {
 					diagnostics,
 					diff,
