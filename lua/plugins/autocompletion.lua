@@ -71,6 +71,21 @@ return { -- Autocompletion
 			},
 			completion = { completeopt = "menu,menuone,noinsert" },
 
+			-- Add window configuration for consistent styling
+			window = {
+				completion = {
+					border = "rounded",
+					winhighlight = "Normal:Pmenu,FloatBorder:PmenuBorder,CursorLine:PmenuSel,Search:None",
+					scrollbar = false,
+				},
+				documentation = {
+					border = "rounded",
+					winhighlight = "Normal:CmpDocumentation,FloatBorder:CmpDocumentationBorder",
+					max_width = 80,
+					max_height = 12,
+				},
+			},
+
 			mapping = cmp.mapping.preset.insert({
 				-- Select the [n]ext item
 				["<C-n>"] = cmp.mapping.select_next_item(),
@@ -145,5 +160,12 @@ return { -- Autocompletion
 				end,
 			},
 		})
+		-- Set highlight groups for consistent transparency and styling
+		vim.api.nvim_set_hl(0, "CmpDocumentation", { bg = "NONE" }) -- Transparent documentation background
+		vim.api.nvim_set_hl(0, "CmpDocumentationBorder", { link = "FloatBorder" }) -- Use same border as other floating windows
+		vim.api.nvim_set_hl(0, "PmenuBorder", { link = "FloatBorder" }) -- Use same border for completion menu
+
+		-- Optional: Make completion menu transparent too
+		vim.api.nvim_set_hl(0, "Pmenu", { bg = "NONE" }) -- Uncomment for transparent completion menu
 	end,
 }

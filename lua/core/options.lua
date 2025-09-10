@@ -41,6 +41,7 @@ vim.o.showtabline = 0 -- Always show tabs (default: 1)
 vim.o.laststatus = 2 -- Global statusline
 vim.o.cmdheight = 0 -- More space in the Neovim command line for displaying messages (default: 1)
 vim.o.pumheight = 10 -- Pop up menu height (default: 0)
+vim.o.winborder = "rounded" -- adds border fow floating windows
 
 -- Navigation and Movement
 vim.o.whichwrap = "bs<>[]hl" -- Which "horizontal" keys are allowed to travel to prev/next line (default: 'b,s')
