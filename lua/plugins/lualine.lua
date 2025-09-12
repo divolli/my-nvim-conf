@@ -43,6 +43,37 @@ return {
 			return ""
 		end
 
+		-- My own lualine color setup
+		-- local colors = require("kanagawa.colors").setup()
+		--
+		-- local my_lualine_theme = {
+		-- 	normal = {
+		-- 		a = { fg = colors.palette.dragonBlack3, bg = colors.palette.dragonAsh, gui = "bold" }, -- normal mode
+		-- 		b = { fg = colors.palette.fujiWhite, bg = colors.palette.sumiInk1 },
+		-- 		c = { fg = colors.palette.fujiWhite, bg = colors.palette.sumiInk0 },
+		-- 	colors.palette.lotusGreen3},
+		-- 	insert = {
+		-- 		a = { fg = colors.palette.dragonBlack3, bg = colors.palette.dragonGreen2, gui = "bold" }, -- keep green if you like
+		-- 		b = { fg = colors.palette.fujiWhite, bg = colors.palette.sumiInk1 },
+		-- 		c = { fg = colors.palette.fujiWhite, bg = colors.palette.sumiInk0 },
+		-- 	},
+		-- 	visual = {
+		-- 		a = { fg = colors.palette.dragonBlack3, bg = colors.palette.dragonOrange2, gui = "bold" }, -- new visual color
+		-- 		b = { fg = colors.palette.fujiWhite, bg = colors.palette.sumiInk1 },
+		-- 		c = { fg = colors.palette.fujiWhite, bg = colors.palette.sumiInk0 },
+		-- 	},
+		-- 	replace = {
+		-- 		a = { fg = colors.palette.dragonBlack3, bg = colors.palette.peachRed, gui = "bold" },
+		-- 		b = { fg = colors.palette.fujiWhite, bg = colors.palette.sumiInk1 },
+		-- 		c = { fg = colors.palette.fujiWhite, bg = colors.palette.sumiInk0 },
+		-- 	},
+		-- 	inactive = {
+		-- 		a = { fg = colors.palette.sumiInk1, bg = colors.palette.sumiInk0 },
+		-- 		b = { fg = colors.palette.sumiInk1, bg = colors.palette.sumiInk0 },
+		-- 		c = { fg = colors.palette.sumiInk1, bg = colors.palette.sumiInk0 },
+		-- 	},
+		-- }
+
 		local hide_in_width = function()
 			return vim.fn.winwidth(0) > 100
 		end
@@ -68,7 +99,7 @@ return {
 		require("lualine").setup({
 			options = {
 				icons_enabled = true,
-				theme = "gruvbox", -- Set theme based on environment variable
+				theme = "auto", -- my_lualine_theme, -- Set theme based on environment variable
 				section_separators = { left = "", right = "" },
 				component_separators = { left = "|", right = "|" },
 				disabled_filetypes = { "alpha" },
