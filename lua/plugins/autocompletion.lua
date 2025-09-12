@@ -160,12 +160,5 @@ return { -- Autocompletion
 				end,
 			},
 		})
-		-- Set highlight groups for consistent transparency and styling
-		vim.api.nvim_set_hl(0, "CmpDocumentation", { bg = "NONE" }) -- Transparent documentation background
-		vim.api.nvim_set_hl(0, "CmpDocumentationBorder", { link = "FloatBorder" }) -- Use same border as other floating windows
-		vim.api.nvim_set_hl(0, "PmenuBorder", { link = "FloatBorder" }) -- Use same border for completion menu
-
-		-- Optional: Make completion menu transparent too
-		vim.api.nvim_set_hl(0, "Pmenu", { bg = "NONE" }) -- Uncomment for transparent completion menu
 	end,
 }
