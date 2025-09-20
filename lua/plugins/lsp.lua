@@ -128,6 +128,7 @@ return {
 
 		-- Enable the following language servers
 		local servers = {
+			--  NOTE: C/C++ servers
 			cmake = {},
 			clangd = {
 				cmd = {
@@ -156,32 +157,48 @@ return {
 					},
 				},
 			},
-			ts_ls = {},
+			--  NOTE: Python servers
 			ruff = {},
-			pylsp = {
+			pyright = {
 				settings = {
-					pylsp = {
-						plugins = {
-							pyflakes = { enabled = false },
-							pycodestyle = { enabled = false },
-							autopep8 = { enabled = false },
-							yapf = { enabled = false },
-							mccabe = { enabled = false },
-							pylsp_mypy = { enabled = false },
-							pylsp_black = { enabled = false },
-							pylsp_isort = { enabled = false },
+					python = {
+						analysis = {
+							-- Enable all diagnostics
+							typeCheckingMode = "basic", -- can be "off", "basic", or "strict"
+							autoSearchPaths = true,
+							diagnosticMode = "workspace", -- or "openFilesOnly"
+							useLibraryCodeForTypes = true,
+							stubPath = vim.fn.stdpath("data") .. "/lazy/python-type-stubs",
 						},
 					},
 				},
 			},
+			-- NOTE: frontend servers
+			ts_ls = {},
 			html = { filetypes = { "html", "twig", "hbs" } },
 			cssls = {},
 			tailwindcss = {},
+			--  NOTE: Utils servers
 			dockerls = {},
 			sqlls = {},
 			terraformls = {},
 			jsonls = {},
 			yamlls = {},
+			bashls = {
+				filetypes = { "sh", "bash", "zsh" },
+				settings = {
+					bashIde = {
+						globPattern = "**/*@(.sh|.inc|.bash|.command|.zsh)",
+						backgroundAnalysisMaxFiles = 500,
+						enableSourceErrorDiagnostics = false,
+						explainshellEndpoint = "",
+						logLevel = "info",
+						shellcheckPath = "shellcheck",
+						shellcheckArguments = "",
+					},
+				},
+			},
+			--  NOTE: Lua and text files servers
 			ltex = {
 				settings = {
 					ltex = {
@@ -221,6 +238,8 @@ return {
 			"cmake-language-server", -- CMake
 			"clang-format", -- C/C++ formatter
 			"cpplint", -- C++ linter
+			"pyright", -- Python LSP
+			"ruff", --Python linter and formatter
 		})
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
