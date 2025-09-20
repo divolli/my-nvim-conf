@@ -69,7 +69,7 @@ return {
 				--  For example, in C this would take you to the header.
 				map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
-				-- Format current buffer (very useful for C/C++)
+				-- Format current buffer
 				map("<leader>f", function()
 					vim.lsp.buf.format({ async = true })
 				end, "[F]ormat Buffer")
@@ -128,6 +128,7 @@ return {
 
 		-- Enable the following language servers
 		local servers = {
+			--  NOTE: C/C++ servers
 			cmake = {},
 			clangd = {
 				cmd = {
@@ -156,7 +157,7 @@ return {
 					},
 				},
 			},
-			ts_ls = {},
+			--  NOTE: Python servers
 			ruff = {},
 			pylsp = {
 				settings = {
@@ -174,14 +175,32 @@ return {
 					},
 				},
 			},
+			-- NOTE: frontend servers
+			ts_ls = {},
 			html = { filetypes = { "html", "twig", "hbs" } },
 			cssls = {},
 			tailwindcss = {},
+			--  NOTE: Utils servers
 			dockerls = {},
 			sqlls = {},
 			terraformls = {},
 			jsonls = {},
 			yamlls = {},
+			bashls = {
+				filetypes = { "sh", "bash", "zsh" },
+				settings = {
+					bashIde = {
+						globPattern = "**/*@(.sh|.inc|.bash|.command|.zsh)",
+						backgroundAnalysisMaxFiles = 500,
+						enableSourceErrorDiagnostics = false,
+						explainshellEndpoint = "",
+						logLevel = "info",
+						shellcheckPath = "shellcheck",
+						shellcheckArguments = "",
+					},
+				},
+			},
+			--  NOTE: Lua and text files servers
 			ltex = {
 				settings = {
 					ltex = {
@@ -221,6 +240,8 @@ return {
 			"cmake-language-server", -- CMake
 			"clang-format", -- C/C++ formatter
 			"cpplint", -- C++ linter
+			"pyright", -- Python LSP
+			"ruff", --Python linter and formatter
 		})
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
