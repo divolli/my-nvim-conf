@@ -69,7 +69,7 @@ return {
 				--  For example, in C this would take you to the header.
 				map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
-				-- Format current buffer (very useful for C/C++)
+				-- Format current buffer
 				map("<leader>f", function()
 					vim.lsp.buf.format({ async = true })
 				end, "[F]ormat Buffer")
@@ -159,16 +159,18 @@ return {
 			},
 			--  NOTE: Python servers
 			ruff = {},
-			pyright = {
+			pylsp = {
 				settings = {
-					python = {
-						analysis = {
-							-- Enable all diagnostics
-							typeCheckingMode = "basic", -- can be "off", "basic", or "strict"
-							autoSearchPaths = true,
-							diagnosticMode = "workspace", -- or "openFilesOnly"
-							useLibraryCodeForTypes = true,
-							stubPath = vim.fn.stdpath("data") .. "/lazy/python-type-stubs",
+					pylsp = {
+						plugins = {
+							pyflakes = { enabled = false },
+							pycodestyle = { enabled = false },
+							autopep8 = { enabled = false },
+							yapf = { enabled = false },
+							mccabe = { enabled = false },
+							pylsp_mypy = { enabled = false },
+							pylsp_black = { enabled = false },
+							pylsp_isort = { enabled = false },
 						},
 					},
 				},

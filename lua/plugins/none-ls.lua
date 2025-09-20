@@ -21,11 +21,17 @@ return {
 		})
 
 		local sources = {
-			diagnostics.checkmake,
-			formatting.prettier.with({ filetypes = { "html", "json", "yaml", "markdown" } }),
-			formatting.stylua,
-			formatting.shfmt.with({ args = { "-i", "4" } }),
-			formatting.terraform_fmt,
+			-- Diagnostics (linters)
+			diagnostics.checkmake, -- Makefile linter
+
+			-- Formatters
+			formatting.prettier.with({
+				filetypes = { "html", "json", "yaml", "markdown", "javascript", "typescript" },
+			}),
+			formatting.stylua, -- Lua formatter
+			formatting.shfmt.with({ args = { "-i", "4" } }), -- Shell formatter
+			formatting.terraform_fmt, -- Terraform formatter
+
 			require("none-ls.formatting.ruff").with({ extra_args = { "--extend-select", "I" } }),
 			require("none-ls.formatting.ruff_format"),
 		}
