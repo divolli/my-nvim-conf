@@ -68,7 +68,7 @@ return {
 		require("lualine").setup({
 			options = {
 				icons_enabled = true,
-				theme = "auto", -- Set theme based on environment variable
+				theme = "gruvbox-material", -- Set theme based on environment variable
 				section_separators = { left = "", right = "" },
 				component_separators = { left = "|", right = "|" },
 				disabled_filetypes = { "alpha" },
